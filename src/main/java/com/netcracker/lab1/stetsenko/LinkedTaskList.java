@@ -239,7 +239,7 @@ public class LinkedTaskList extends TaskList {
         String result = "";
 
         for (Iterator it = iterator(); it.hasNext(); ) {
-            result = result + "[" + it.next().toString() + "]";
+            result = result + it.next().toString() + '\n';
         }
         return result;
     }

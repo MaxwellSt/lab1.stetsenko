@@ -1,5 +1,6 @@
 package com.netcracker.lab1.stetsenko;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -204,10 +205,17 @@ public class Task implements Serializable {
 
     }
     public String toString(){
-        return "title:\n" + this.title +
-                "time:\n" + this.time +
-                "end:\n" + this.end +
-                "interval:\n" + this.interval +
-                "active:" + this.active;
+        String result;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m:S.sss");
+        if (isRepeated()) {
+            result = "\"" + getTitle() + "\"" + " from [" + format.format(getStartTime()) + "] to ["
+                    + format.format(getEndTime()) + "] every [" + TaskIO.intervalToFormat(getRepeatInterval()) + "]"
+                    + ((isActive()) ? "" : " inactive");
+        } else {
+            result = "\"" + getTitle() + "\"" + " at [" + format.format(getTime()) + "]"
+                    + ((isActive()) ? "" : " inactive");
+        }
+
+        return result;
     }
 }

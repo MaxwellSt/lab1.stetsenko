@@ -277,7 +277,7 @@ public class TaskIO {
      * @param interval in sec
      * @return
      */
-    private static String intervalToFormat(int interval) {
+    public static String intervalToFormat(int interval) {
         int days = (int) (interval / 86400);
         interval = interval - (days * 86400);
         int hours = (int) (interval / 3600);
