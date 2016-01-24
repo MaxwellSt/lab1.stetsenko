@@ -1,6 +1,7 @@
 package com.netcracker.lab1.stetsenko.model;
 
 import com.netcracker.lab1.stetsenko.LinkedTaskList;
+import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskIO;
 import com.netcracker.lab1.stetsenko.TaskList;
 
@@ -12,11 +13,9 @@ import java.io.IOException;
  */
 public class ModelImpl implements Model {
 
-    public String getFirstMessage() {
-        return "First message";
-    }
+    private TaskList taskList;
 
-    public String getTaskListFromFile(String pathFile) {
+    public TaskList getTaskListFromFile(String pathFile) {
         FileReader in = null;
         try {
             in = new FileReader(pathFile);
@@ -24,17 +23,17 @@ public class ModelImpl implements Model {
             e.printStackTrace();
         }
 
-        TaskList taskList = new LinkedTaskList();
-        TaskIO.read(taskList, in);
+        this.taskList = new LinkedTaskList();
+        TaskIO.read(this.taskList, in);
 
-        return taskList.toString();
+        return getTaskList();
     }
 
-    public String getSecondMessage() {
-        return "Second message";
+    public boolean addTask() {
+        return false;
     }
 
-    public String getThirdMessage() {
-        return "Third message";
+    public TaskList getTaskList(){
+        return this.taskList;
     }
 }

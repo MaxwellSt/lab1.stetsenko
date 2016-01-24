@@ -33,16 +33,33 @@ public class ControllerImpl {
 
             action = view.getAction();
 
-            switch ( action ) {
+            switch (action) {
                 case 11:
                     String pathFile = view.showPathFile();
-                    if(validatePathFile(pathFile))
+                    if (validatePathFile(pathFile)) {
                         view.showTaskListPage(model.getTaskListFromFile(pathFile));
+                    } else {
+                        view.showMessage( "File not found" );
+                        view.showStartPage();
+                    }
                     break;
                 case 12:
                 case 24:
                     exit = true;
                     break;
+                case 22: //add new task
+                    view.showAddTask();
+                case 23: //edit task
+                    view.showEditTask();
+                case 31: //Add/edit repeated task
+                    String repTask = view.editRepeatedTask();
+                case 32: //Add/edit unrepeated task
+                    String unrepTask = view.editUnrepeatedTask();
+                case 33: //Back to Task list page
+                case 42:
+                    view.showTaskListPage(model.getTaskList());
+                case 41:
+                    int i = view.showSelectTask();
                 default:
                     view.showMessage( "You entered wrong action" );
             }
