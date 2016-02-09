@@ -3,11 +3,13 @@ package com.netcracker.lab1.stetsenko.view;
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
+
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
 
 /**
- * Created by Макс on 20.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 20.01.2016.
  */
 public class ViewImpl implements View{
 
@@ -66,16 +68,40 @@ public class ViewImpl implements View{
         pageID = "ADDTASK";
     }
 
-    public String editRepeatedTask(){
-        String result = null;
+    public HashMap<String, String> editRepeatedTask(){
 
-        return result;
+        return null;
     }
 
-    public String editUnrepeatedTask(){
-        String result = null;
+    public HashMap<String, String> editUnrepeatedTask(){
 
-        return result;
+        return null;
+    }
+
+    public HashMap<String, String> addRepeatedTask() {
+
+        HashMap<String, String> mapTask = new HashMap<String, String>();
+        System.out.println("- enter title of task.");
+        mapTask.put("title", scanner.next());
+        System.out.println("- enter start-time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
+        mapTask.put("startTime", scanner.next());
+        System.out.println("- enter end-time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
+        mapTask.put("endTime", scanner.next());
+        System.out.println("- enter interval of task, in sec.");
+        mapTask.put("interval", scanner.next());
+
+        return mapTask;
+    }
+
+    public HashMap<String, String> addUnrepeatedTask() {
+
+        HashMap<String, String> mapTask = new HashMap<String, String>();
+        System.out.println("- enter title of task.");
+        mapTask.put("title", scanner.next());
+        System.out.println("- enter time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
+        mapTask.put("time", scanner.next());
+
+        return mapTask;
     }
 
     public void showEditTask() {

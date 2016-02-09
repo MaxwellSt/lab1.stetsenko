@@ -29,8 +29,8 @@ public class ModelImpl implements Model {
         return getTaskList();
     }
 
-    public boolean addTask() {
-        return false;
+    public boolean addTask(Task task) {
+        return this.taskList.add(task);
     }
 
     public TaskList getTaskList(){

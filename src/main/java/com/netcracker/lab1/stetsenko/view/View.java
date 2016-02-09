@@ -3,8 +3,10 @@ package com.netcracker.lab1.stetsenko.view;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
 
+import java.util.HashMap;
+
 /**
- * Created by Макс on 20.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 20.01.2016.
  */
 public interface View {
 
@@ -20,9 +22,13 @@ public interface View {
 
     void showAddTask();
 
-    String editRepeatedTask();
+    HashMap<String, String> editRepeatedTask();
 
-    String editUnrepeatedTask();
+    HashMap<String, String> editUnrepeatedTask();
+
+    HashMap<String, String> addRepeatedTask();
+
+    HashMap<String, String> addUnrepeatedTask();
 
     void showEditTask();
 

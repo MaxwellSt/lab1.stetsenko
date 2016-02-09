@@ -1,14 +1,16 @@
 package com.netcracker.lab1.stetsenko.controller;
 
+import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.model.Model;
 import com.netcracker.lab1.stetsenko.model.ModelImpl;
 import com.netcracker.lab1.stetsenko.view.View;
 import com.netcracker.lab1.stetsenko.view.ViewImpl;
 
 import java.io.File;
+import java.util.HashMap;
 
 /**
- * Created by Макс on 20.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 20.01.2016.
  */
 public class ControllerImpl {
 
@@ -44,6 +46,7 @@ public class ControllerImpl {
                     }
                     break;
                 case STARTPAGE2:
+                    break;
                 case TASKLIST4:
                     exit = true;
                     break;
@@ -56,11 +59,17 @@ public class ControllerImpl {
                 case TASKLIST3: //edit task
                     view.showEditTask();
                     break;
-                case ADDTASK1: //Add/edit repeated task
-                    String repTask = view.editRepeatedTask();
+                case ADDTASK1: //Add repeated task
+                    HashMap<String, String> mapTask = view.addRepeatedTask();
+                    if(validateMapTask(mapTask)){
+                        model.addTask(createTask(mapTask));
+                    }
                     break;
-                case ADDTASK2: //Add/edit unrepeated task
-                    String unrepTask = view.editUnrepeatedTask();
+                case ADDTASK2: //Add unrepeated task
+                    HashMap<String, String> mapTask1 = view.addUnrepeatedTask();
+                    if(validateMapTask(mapTask1)){
+                       model.addTask(createTask(mapTask1));
+                    }
                     break;
                 case ADDTASK3: //Back to Task list page
                     view.showTaskListPage(model.getTaskList());
@@ -78,5 +87,15 @@ public class ControllerImpl {
     private boolean validatePathFile(String pathFile){
         File file = new File(pathFile);
         return file.exists();
+    }
+
+    private boolean validateMapTask(HashMap<String, String> mapTask){
+
+        Boolean result = false;
+        return result;
+    }
+
+    private Task createTask(HashMap<String, String> mapTask){
+        return null;
     }
 }

@@ -1,16 +1,17 @@
 package com.netcracker.lab1.stetsenko.model;
 
+import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 
 /**
- * Created by Макс on 20.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 20.01.2016.
  */
 public interface Model {
 
-    public TaskList getTaskListFromFile(String pathFile);
+    TaskList getTaskListFromFile(String pathFile);
 
-    public boolean addTask();
+    boolean addTask(Task task);
 
-    public TaskList getTaskList();
+    TaskList getTaskList();
 
 }
