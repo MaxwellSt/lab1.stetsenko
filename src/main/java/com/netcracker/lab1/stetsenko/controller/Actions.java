@@ -1,7 +1,7 @@
 package com.netcracker.lab1.stetsenko.controller;
 
 /**
- * Created by Макс on 25.01.2016.
+ * Created by пїЅпїЅпїЅпїЅ on 25.01.2016.
  */
 public enum Actions {
     STARTPAGE1,
@@ -10,10 +10,13 @@ public enum Actions {
     TASKLIST2,
     TASKLIST3,
     TASKLIST4,
+    TASKLIST5,
     ADDTASK1,
     ADDTASK2,
     ADDTASK3,
     EDITTASK1,
-    EDITTASK2
+    EDITTASK2,
+    ERRORADDTASK1,
+    ERRORADDTASK2
 
 }

@@ -5,7 +5,9 @@ import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskIO;
 import com.netcracker.lab1.stetsenko.TaskList;
 
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 /**
@@ -35,5 +37,18 @@ public class ModelImpl implements Model {
 
     public TaskList getTaskList(){
         return this.taskList;
+    }
+
+    public TaskList saveTaskListFromFile(String pathFile) {
+
+        FileWriter out = null;
+        try {
+            out = new FileWriter(pathFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        TaskIO.write(this.taskList, out);
+        return getTaskList();
     }
 }

@@ -22,6 +22,8 @@ public interface View {
 
     void showAddTask();
 
+    void showErrorAddTask();
+
     HashMap<String, String> editRepeatedTask();
 
     HashMap<String, String> editUnrepeatedTask();

@@ -14,4 +14,6 @@ public interface Model {
 
     TaskList getTaskList();
 
+    TaskList saveTaskListFromFile(String pathFile);
+
 }

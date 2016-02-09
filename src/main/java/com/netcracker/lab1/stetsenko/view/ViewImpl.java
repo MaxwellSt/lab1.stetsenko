@@ -56,7 +56,8 @@ public class ViewImpl implements View{
         System.out.println("1. Show Calendar");
         System.out.println("2. Add new task");
         System.out.println("3. Edit task");
-        System.out.println("4. Exit");
+        System.out.println("4. Save task list file");
+        System.out.println("5. Exit");
         pageID = "TASKLIST";
     }
 
@@ -66,6 +67,13 @@ public class ViewImpl implements View{
         System.out.println("2. Add unrepeated task");
         System.out.println("3. Back");
         pageID = "ADDTASK";
+    }
+
+    public void showErrorAddTask() {
+        System.out.println("********* Error Add task page *********");
+        System.out.println("1. Repeat add task");
+        System.out.println("2. Back");
+        pageID = "ERRORADDTASK";
     }
 
     public HashMap<String, String> editRepeatedTask(){
@@ -82,13 +90,14 @@ public class ViewImpl implements View{
 
         HashMap<String, String> mapTask = new HashMap<String, String>();
         System.out.println("- enter title of task.");
-        mapTask.put("title", scanner.next());
+        scanner.nextLine();
+        mapTask.put("title", scanner.nextLine());
         System.out.println("- enter start-time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
-        mapTask.put("startTime", scanner.next());
+        mapTask.put("startTime", scanner.nextLine());
         System.out.println("- enter end-time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
-        mapTask.put("endTime", scanner.next());
+        mapTask.put("endTime", scanner.nextLine());
         System.out.println("- enter interval of task, in sec.");
-        mapTask.put("interval", scanner.next());
+        mapTask.put("interval", scanner.nextLine());
 
         return mapTask;
     }
@@ -97,9 +106,10 @@ public class ViewImpl implements View{
 
         HashMap<String, String> mapTask = new HashMap<String, String>();
         System.out.println("- enter title of task.");
-        mapTask.put("title", scanner.next());
+        scanner.nextLine();
+        mapTask.put("title", scanner.nextLine());
         System.out.println("- enter time of task. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
-        mapTask.put("time", scanner.next());
+        mapTask.put("time", scanner.nextLine());
 
         return mapTask;
     }
