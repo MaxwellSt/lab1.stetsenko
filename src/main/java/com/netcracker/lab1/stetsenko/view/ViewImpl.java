@@ -2,7 +2,7 @@ package com.netcracker.lab1.stetsenko.view;
 
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
-
+import com.netcracker.lab1.stetsenko.controller.Actions;
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class ViewImpl implements View{
 
     private Scanner scanner;
-    private int pageID = 0;
+    private String pageID = "";
 
     public ViewImpl() {
         scanner = new Scanner( System.in );
@@ -23,11 +23,13 @@ public class ViewImpl implements View{
         System.out.println( "Enter please one of the following actions:" );
         System.out.println( "1. Read TaskList from file" );
         System.out.println( "2. Exit" );
-        pageID = 1;
+        pageID = "STARTPAGE";
     }
 
-    public int getAction() {
-        return Integer.parseInt("" + pageID + scanner.nextInt());
+    public Actions getAction() {
+        Actions result;
+        String s = pageID + scanner.nextInt();
+        return Actions.valueOf(s);
     }
 
     public void showMessage( String message ) {
@@ -35,10 +37,7 @@ public class ViewImpl implements View{
     }
 
     public String showPathFile(){
-        System.out.println("Enter path to file:");
-        scanner.nextLine();
-        String pathToFile = scanner.nextLine();
-        return pathToFile;
+        return "test3.txt";
     }
 
     public void showTaskListPage(TaskList taskList) {
@@ -56,7 +55,7 @@ public class ViewImpl implements View{
         System.out.println("2. Add new task");
         System.out.println("3. Edit task");
         System.out.println("4. Exit");
-        pageID = 2;
+        pageID = "TASKLIST";
     }
 
     public void showAddTask() {
@@ -64,7 +63,7 @@ public class ViewImpl implements View{
         System.out.println("1. Add repeated task");
         System.out.println("2. Add unrepeated task");
         System.out.println("3. Back");
-        pageID = 3;
+        pageID = "ADDTASK";
     }
 
     public String editRepeatedTask(){
@@ -83,7 +82,7 @@ public class ViewImpl implements View{
         System.out.println("********* Edit task page *********");
         System.out.println("1. Enter number of task.");
         System.out.println("2. Back");
-        pageID = 4;
+        pageID = "EDITTASK";
     }
 
     public int showSelectTask() {

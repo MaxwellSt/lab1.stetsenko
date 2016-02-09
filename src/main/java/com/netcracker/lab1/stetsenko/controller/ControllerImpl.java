@@ -25,7 +25,7 @@ public class ControllerImpl {
     }
 
     public void start() {
-        int action;
+        Actions action;
         boolean exit = false;
         view.showStartPage();
 
@@ -34,7 +34,7 @@ public class ControllerImpl {
             action = view.getAction();
 
             switch (action) {
-                case 11:
+                case STARTPAGE1:
                     String pathFile = view.showPathFile();
                     if (validatePathFile(pathFile)) {
                         view.showTaskListPage(model.getTaskListFromFile(pathFile));
@@ -43,25 +43,34 @@ public class ControllerImpl {
                         view.showStartPage();
                     }
                     break;
-                case 12:
-                case 24:
+                case STARTPAGE2:
+                case TASKLIST4:
                     exit = true;
                     break;
-                case 22: //add new task
+                case TASKLIST1:
+                    System.out.println("** calendar **");
+                    break;
+                case TASKLIST2: //add new task
                     view.showAddTask();
-                case 23: //edit task
+                    break;
+                case TASKLIST3: //edit task
                     view.showEditTask();
-                case 31: //Add/edit repeated task
+                    break;
+                case ADDTASK1: //Add/edit repeated task
                     String repTask = view.editRepeatedTask();
-                case 32: //Add/edit unrepeated task
+                    break;
+                case ADDTASK2: //Add/edit unrepeated task
                     String unrepTask = view.editUnrepeatedTask();
-                case 33: //Back to Task list page
-                case 42:
+                    break;
+                case ADDTASK3: //Back to Task list page
                     view.showTaskListPage(model.getTaskList());
-                case 41:
+                    break;
+                case EDITTASK1:
                     int i = view.showSelectTask();
+                    break;
                 default:
                     view.showMessage( "You entered wrong action" );
+                    break;
             }
         }
     }

@@ -1,29 +1,30 @@
 package com.netcracker.lab1.stetsenko.view;
 
 import com.netcracker.lab1.stetsenko.TaskList;
+import com.netcracker.lab1.stetsenko.controller.Actions;
 
 /**
  * Created by Макс on 20.01.2016.
  */
 public interface View {
 
-    public void showStartPage();
+    void showStartPage();
 
-    public int getAction();
+    Actions getAction();
 
-    public void showMessage( String message );
+    void showMessage( String message );
 
-    public String showPathFile();
+    String showPathFile();
 
-    public void showTaskListPage(TaskList taskList);
+    void showTaskListPage(TaskList taskList);
 
-    public void showAddTask();
+    void showAddTask();
 
-    public String editRepeatedTask();
+    String editRepeatedTask();
 
-    public String editUnrepeatedTask();
+    String editUnrepeatedTask();
 
-    public void showEditTask();
+    void showEditTask();
 
-    public int showSelectTask();
+    int showSelectTask();
 }
