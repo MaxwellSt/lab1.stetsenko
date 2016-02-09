@@ -63,6 +63,13 @@ public class ControllerImpl {
                     view.showEditTask();
                     break;
                 case TASKLIST4:
+                    String pathFile1 = view.showPathFile();
+                    if (validatePathFile(pathFile1)) {
+                        view.showTaskListPage(model.saveTaskListFromFile(pathFile1));
+                    } else {
+                        view.showMessage( "File not found" );
+                        view.showStartPage();
+                    }
                     break;
                 case ADDTASK1: //Add repeated task
                     HashMap<String, String> mapTask = view.addRepeatedTask();
@@ -109,6 +116,7 @@ public class ControllerImpl {
         Date startTime = null;
         Date endTime = null;
         int interval = 0;
+        Boolean active = false;
 
         if(mapTask.containsKey("time")) {
             try {
@@ -143,11 +151,25 @@ public class ControllerImpl {
             }
         }
 
+        if (mapTask.containsKey("active")){
+            try {
+                active = (mapTask.get("interval").toLowerCase().equals("y"));
+            } catch (NumberFormatException e) {
+                System.out.println("wrong active <" + mapTask.get("active") + ">");
+                result = false;
+            }
+        }
+
+        Task task = null;
         if (result){
             if(time != null) {
-                result = model.addTask(new Task(mapTask.get("title"), time));
+                task = new Task(mapTask.get("title"), time);
+                task.setActive(active);
+                result = model.addTask(task);
             }else{
-                result = model.addTask(new Task(mapTask.get("title"), startTime, endTime, interval));
+                task = new Task(mapTask.get("title"), startTime, endTime, interval);
+                task.setActive(active);
+                result = model.addTask(task);
             }
         }
 

@@ -98,6 +98,8 @@ public class ViewImpl implements View{
         mapTask.put("endTime", scanner.nextLine());
         System.out.println("- enter interval of task, in sec.");
         mapTask.put("interval", scanner.nextLine());
+        System.out.println("- Activated task (Y/N)?");
+        mapTask.put("active", scanner.nextLine());
 
         return mapTask;
     }
