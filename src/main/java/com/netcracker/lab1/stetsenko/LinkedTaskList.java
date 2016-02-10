@@ -173,7 +173,7 @@ public class LinkedTaskList extends TaskList {
                 if (!hasNext())
                     throw new NoSuchElementException();
 
-                lastReturned = next = (next == null) ? last : next.prev;
+                lastReturned = next = (next == null) ? first : next.next;
                 nextIndex--;
                 return lastReturned.item;
             }

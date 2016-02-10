@@ -11,6 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by ���� on 20.01.2016.
@@ -19,6 +20,7 @@ public class ControllerImpl {
 
     private Model model;
     private View view;
+    private Task currentTask = null;
 
     public static void main( String[] args ) {
         new ControllerImpl( new ModelImpl(), new ViewImpl() ).start();
@@ -60,7 +62,23 @@ public class ControllerImpl {
                     view.showAddTask();
                     break;
                 case TASKLIST3: //edit task
-                    view.showEditTask();
+                case ERROREDITTASK1:
+                    int i = view.showSelectTask();
+                    Task editTask= model.getTaskList().getTask(i-1);
+                    System.out.println(editTask.toString());
+                    HashMap<String, String> mapEditTask = null;
+                    if(editTask.isRepeated()){
+                       mapEditTask = view.editRepeatedTask(editTask);
+                    }else{
+                        mapEditTask = view.editUnrepeatedTask(editTask);
+                    }
+                    if(!validateMapTask(mapEditTask)){
+                        view.showErrorAddTask();
+                    }else{
+                        model.getTaskList().remove(editTask);
+                        model.getTaskList().add(currentTask);
+                        view.showTaskListPage(model.getTaskList());
+                    }
                     break;
                 case TASKLIST4:
                     String pathFile1 = view.showPathFile();
@@ -76,6 +94,7 @@ public class ControllerImpl {
                     if(!validateMapTask(mapTask)){
                         view.showErrorAddTask();
                     }else{
+                        model.addTask(currentTask);
                         view.showTaskListPage(model.getTaskList());
                     }
                     break;
@@ -84,15 +103,14 @@ public class ControllerImpl {
                     if(!validateMapTask(mapTask1)){
                         view.showErrorAddTask();
                     }else{
+                        model.addTask(currentTask);
                         view.showTaskListPage(model.getTaskList());
                     }
                     break;
                 case ADDTASK3: //Back to Task list page
                 case ERRORADDTASK2:
+                case ERROREDITTASK2:
                     view.showTaskListPage(model.getTaskList());
-                    break;
-                case EDITTASK1:
-                    int i = view.showSelectTask();
                     break;
                 default:
                     view.showMessage( "You entered wrong action" );
@@ -153,23 +171,20 @@ public class ControllerImpl {
 
         if (mapTask.containsKey("active")){
             try {
-                active = (mapTask.get("interval").toLowerCase().equals("y"));
+                active = (mapTask.get("active").toLowerCase().equals("y"));
             } catch (NumberFormatException e) {
                 System.out.println("wrong active <" + mapTask.get("active") + ">");
                 result = false;
             }
         }
 
-        Task task = null;
         if (result){
             if(time != null) {
-                task = new Task(mapTask.get("title"), time);
-                task.setActive(active);
-                result = model.addTask(task);
+                currentTask = new Task(mapTask.get("title"), time);
+                currentTask.setActive(active);
             }else{
-                task = new Task(mapTask.get("title"), startTime, endTime, interval);
-                task.setActive(active);
-                result = model.addTask(task);
+                currentTask = new Task(mapTask.get("title"), startTime, endTime, interval);
+                currentTask.setActive(active);
             }
         }
 

@@ -4,6 +4,7 @@ import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -76,14 +77,40 @@ public class ViewImpl implements View{
         pageID = "ERRORADDTASK";
     }
 
-    public HashMap<String, String> editRepeatedTask(){
+    public HashMap<String, String> editRepeatedTask(Task task){
 
-        return null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m");
+
+        HashMap<String, String> mapTask = new HashMap<String, String>();
+        System.out.println("- enter title of task. Current: <"+ task.getTitle() + ">");
+        scanner.nextLine();
+        mapTask.put("title", scanner.nextLine());
+        System.out.println("- enter start-time of task. <yyyy-MM-dd H:m>. Current: <" + format.format(task.getStartTime()) + ">");
+        mapTask.put("startTime", scanner.nextLine());
+        System.out.println("- enter end-time of task. <yyyy-MM-dd H:m> Current: <" + format.format(task.getEndTime()) + ">");
+        mapTask.put("endTime", scanner.nextLine());
+        System.out.println("- enter interval of task, in sec. Current: <" + task.getRepeatInterval());
+        mapTask.put("interval", scanner.nextLine());
+        System.out.println("- Activated task (Y/N)? Current: <" + task.isActive() + ">");
+        mapTask.put("active", scanner.nextLine());
+
+        return mapTask;
     }
 
-    public HashMap<String, String> editUnrepeatedTask(){
+    public HashMap<String, String> editUnrepeatedTask(Task task){
 
-        return null;
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m");
+
+        HashMap<String, String> mapTask = new HashMap<String, String>();
+        System.out.println("- enter title of task. Current: <"+ task.getTitle() + ">");
+        scanner.nextLine();
+        mapTask.put("title", scanner.nextLine());
+        System.out.println("- enter time of task. <yyyy-MM-dd H:m> Current: <" + format.format(task.getTime()) + ">");
+        mapTask.put("time", scanner.nextLine());
+        System.out.println("- Activated task (Y/N)? Current: <" + task.isActive() + ">");
+        mapTask.put("active", scanner.nextLine());
+
+        return mapTask;
     }
 
     public HashMap<String, String> addRepeatedTask() {
@@ -116,14 +143,15 @@ public class ViewImpl implements View{
         return mapTask;
     }
 
-    public void showEditTask() {
-        System.out.println("********* Edit task page *********");
-        System.out.println("1. Enter number of task.");
-        System.out.println("2. Back");
-        pageID = "EDITTASK";
+    public int showSelectTask() {
+        System.out.println("Enter number of task.");
+        return scanner.nextInt();
     }
 
-    public int showSelectTask() {
-        return scanner.nextInt();
+    public void showErrorEditTask() {
+        System.out.println("********* Error Add task page *********");
+        System.out.println("1. Repeat edit task");
+        System.out.println("2. Back");
+        pageID = "ERROREDITTASK";
     }
 }

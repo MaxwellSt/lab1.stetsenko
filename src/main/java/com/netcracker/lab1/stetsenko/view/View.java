@@ -1,5 +1,6 @@
 package com.netcracker.lab1.stetsenko.view;
 
+import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
 
@@ -24,15 +25,15 @@ public interface View {
 
     void showErrorAddTask();
 
-    HashMap<String, String> editRepeatedTask();
+    HashMap<String, String> editRepeatedTask(Task task);
 
-    HashMap<String, String> editUnrepeatedTask();
+    HashMap<String, String> editUnrepeatedTask(Task task);
 
     HashMap<String, String> addRepeatedTask();
 
     HashMap<String, String> addUnrepeatedTask();
 
-    void showEditTask();
-
     int showSelectTask();
+
+    void showErrorEditTask();
 }
