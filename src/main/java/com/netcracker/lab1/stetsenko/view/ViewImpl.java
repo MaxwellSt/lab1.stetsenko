@@ -5,9 +5,7 @@ import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
 
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by ���� on 20.01.2016.
@@ -30,9 +28,20 @@ public class ViewImpl implements View{
     }
 
     public Actions getAction() {
-        Actions result;
-        String s = pageID + scanner.nextInt();
-        return Actions.valueOf(s);
+        Actions result = null;
+
+        try {
+            String s = pageID + scanner.nextInt();
+            result = Actions.valueOf(s);
+        } catch (IllegalArgumentException e) {
+            System.out.println("You entered wrong action. Try again.");
+            result = getAction();
+        }catch (InputMismatchException e){
+            System.out.println("You entered wrong action. Try again.");
+            scanner.nextLine();
+            result = getAction();
+        }
+        return result;
     }
 
     public void showMessage( String message ) {
@@ -153,5 +162,24 @@ public class ViewImpl implements View{
         System.out.println("1. Repeat edit task");
         System.out.println("2. Back");
         pageID = "ERROREDITTASK";
+    }
+
+    public void showCalendar(Iterable<Task> calendar) {
+
+
+
+    }
+
+    public HashMap<String, String> getDateInterval() {
+
+        HashMap<String, String> mapDate = new HashMap<String, String>();
+
+        System.out.println("- enter Date-from. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
+        scanner.nextLine();
+        mapDate.put("dateFrom", scanner.nextLine());
+        System.out.println("- enter Date-to. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
+        mapDate.put("dateTo", scanner.nextLine());
+
+        return mapDate;
     }
 }

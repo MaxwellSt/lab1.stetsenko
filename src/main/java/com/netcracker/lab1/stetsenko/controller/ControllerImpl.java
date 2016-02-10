@@ -43,7 +43,7 @@ public class ControllerImpl {
             switch (action) {
                 case STARTPAGE1:
                     String pathFile = view.showPathFile();
-                    if (validatePathFile(pathFile)) {
+                    if (checkPathFile(pathFile)) {
                         view.showTaskListPage(model.getTaskListFromFile(pathFile));
                     } else {
                         view.showMessage( "File not found" );
@@ -55,7 +55,14 @@ public class ControllerImpl {
                     exit = true;
                     break;
                 case TASKLIST1:
-                    System.out.println("** calendar **");
+                    HashMap<String, String> mapDateString = view.getDateInterval();
+                    HashMap<String, Date> mapDate = null;
+                    if(checkIntervalDate(mapDateString, mapDate)){
+                       view.showCalendar(model.incoming(mapDate.get("dateFrom"), mapDate.get("dateTo")));
+                    }else{
+
+                    }
+
                     break;
                 case TASKLIST2:
                 case ERRORADDTASK1://add new task
@@ -64,7 +71,7 @@ public class ControllerImpl {
                 case TASKLIST3: //edit task
                 case ERROREDITTASK1:
                     int i = view.showSelectTask();
-                    Task editTask= model.getTaskList().getTask(i-1);
+                    Task editTask= model.getTask(i-1);
                     System.out.println(editTask.toString());
                     HashMap<String, String> mapEditTask = null;
                     if(editTask.isRepeated()){
@@ -72,7 +79,7 @@ public class ControllerImpl {
                     }else{
                         mapEditTask = view.editUnrepeatedTask(editTask);
                     }
-                    if(!validateMapTask(mapEditTask)){
+                    if(!checkMapTask(mapEditTask)){
                         view.showErrorAddTask();
                     }else{
                         model.getTaskList().remove(editTask);
@@ -82,7 +89,7 @@ public class ControllerImpl {
                     break;
                 case TASKLIST4:
                     String pathFile1 = view.showPathFile();
-                    if (validatePathFile(pathFile1)) {
+                    if (checkPathFile(pathFile1)) {
                         view.showTaskListPage(model.saveTaskListFromFile(pathFile1));
                     } else {
                         view.showMessage( "File not found" );
@@ -91,7 +98,7 @@ public class ControllerImpl {
                     break;
                 case ADDTASK1: //Add repeated task
                     HashMap<String, String> mapTask = view.addRepeatedTask();
-                    if(!validateMapTask(mapTask)){
+                    if(!checkMapTask(mapTask)){
                         view.showErrorAddTask();
                     }else{
                         model.addTask(currentTask);
@@ -100,7 +107,7 @@ public class ControllerImpl {
                     break;
                 case ADDTASK2: //Add unrepeated task
                     HashMap<String, String> mapTask1 = view.addUnrepeatedTask();
-                    if(!validateMapTask(mapTask1)){
+                    if(!checkMapTask(mapTask1)){
                         view.showErrorAddTask();
                     }else{
                         model.addTask(currentTask);
@@ -119,12 +126,12 @@ public class ControllerImpl {
         }
     }
 
-    private boolean validatePathFile(String pathFile){
+    private boolean checkPathFile(String pathFile){
         File file = new File(pathFile);
         return file.exists();
     }
 
-    private boolean validateMapTask(HashMap<String, String> mapTask){
+    private boolean checkMapTask(HashMap<String, String> mapTask){
 
         Boolean result = true;
 
@@ -185,6 +192,37 @@ public class ControllerImpl {
             }else{
                 currentTask = new Task(mapTask.get("title"), startTime, endTime, interval);
                 currentTask.setActive(active);
+            }
+        }
+
+        return result;
+    }
+
+    private boolean checkIntervalDate(HashMap<String, String> mapDateString, HashMap<String, Date> mapDate){
+
+        Boolean result = true;
+        SimpleDateFormat format = new SimpleDateFormat();
+        format.applyPattern("yyyy-MM-dd H:m");
+
+        Date dateFrom = null;
+        Date dateTo   = null;
+
+        if (mapDateString.containsKey("startTime")){
+            try {
+                dateFrom = format.parse(mapDateString.get("dateFrom"));
+                mapDate.put("dateFrom", dateFrom);
+            } catch (ParseException e) {
+                System.out.println("wrong Date-from format <" + mapDateString.get("dateFrom") + ">");
+                result = false;
+            }
+        }
+        if (mapDateString.containsKey("dateTo")){
+            try {
+                dateTo = format.parse(mapDateString.get("dateTo"));
+                mapDate.put("dateTo", dateTo);
+            } catch (ParseException e) {
+                System.out.println("wrong Date-to format <" + mapDateString.get("dateTo") + ">");
+                result = false;
             }
         }
 

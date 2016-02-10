@@ -1,14 +1,12 @@
 package com.netcracker.lab1.stetsenko.model;
 
-import com.netcracker.lab1.stetsenko.LinkedTaskList;
-import com.netcracker.lab1.stetsenko.Task;
-import com.netcracker.lab1.stetsenko.TaskIO;
-import com.netcracker.lab1.stetsenko.TaskList;
+import com.netcracker.lab1.stetsenko.*;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 /**
  * Created by ���� on 20.01.2016.
@@ -50,5 +48,13 @@ public class ModelImpl implements Model {
 
         TaskIO.write(this.taskList, out);
         return getTaskList();
+    }
+
+    public Task getTask(int i) {
+        return this.taskList.getTask(i);
+    }
+
+    public Iterable<Task> incoming(Date from, Date to){
+        return Tasks.incoming(taskList, from, to);
     }
 }

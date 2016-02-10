@@ -4,6 +4,7 @@ import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.controller.Actions;
 
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -36,4 +37,8 @@ public interface View {
     int showSelectTask();
 
     void showErrorEditTask();
+
+    void showCalendar(Iterable<Task> calendar);
+
+    HashMap<String, String> getDateInterval();
 }
