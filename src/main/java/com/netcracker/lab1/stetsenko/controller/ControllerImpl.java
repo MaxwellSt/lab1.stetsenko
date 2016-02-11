@@ -3,10 +3,13 @@ package com.netcracker.lab1.stetsenko.controller;
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.model.Model;
 import com.netcracker.lab1.stetsenko.model.ModelImpl;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
 import com.netcracker.lab1.stetsenko.view.View;
 import com.netcracker.lab1.stetsenko.view.ViewImpl;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -48,7 +51,11 @@ public class ControllerImpl {
                     log.error("test log error message");
                     String pathFile = view.showPathFile();
                     if (checkPathFile(pathFile)) {
-                        view.showTaskListPage(model.getTaskListFromFile(pathFile));
+                        try {
+                            view.showTaskListPage(model.getTaskListFromFile(pathFile));
+                        } catch (IOException e) {
+                            exit = true;
+                        }
                     } else {
                         view.showMessage( "File not found" );
                         view.showStartPage();
@@ -64,7 +71,11 @@ public class ControllerImpl {
                     if(checkIntervalDate(mapDateString, mapDate)){
                        view.showCalendar(model.incoming(mapDate.get("dateFrom"), mapDate.get("dateTo")));
                     }
-                    view.showTaskListPage(model.getTaskList());
+                    try {
+                        view.showTaskListPage(model.getTaskList());
+                    } catch (NullTaskListException e) {
+                        exit = true;
+                    }
                     break;
                 case TASKLIST2:
                 case ERRORADDTASK1://add new task
@@ -84,15 +95,23 @@ public class ControllerImpl {
                     if(!checkMapTask(mapEditTask)){
                         view.showErrorAddTask();
                     }else{
-                        model.getTaskList().remove(editTask);
-                        model.getTaskList().add(currentTask);
-                        view.showTaskListPage(model.getTaskList());
+                        try {
+                            model.getTaskList().remove(editTask);
+                            model.getTaskList().add(currentTask);
+                            view.showTaskListPage(model.getTaskList());
+                        } catch (NullTaskListException e) {
+                            exit = true;
+                        }
                     }
                     break;
                 case TASKLIST4:
                     String pathFile1 = view.showPathFile();
                     if (checkPathFile(pathFile1)) {
-                        view.showTaskListPage(model.saveTaskListFromFile(pathFile1));
+                        try {
+                            view.showTaskListPage(model.saveTaskListFromFile(pathFile1));
+                        } catch (IOException e) {
+                            exit = true;
+                        }
                     } else {
                         view.showMessage( "File not found" );
                         view.showStartPage();
@@ -103,8 +122,16 @@ public class ControllerImpl {
                     if(!checkMapTask(mapTask)){
                         view.showErrorAddTask();
                     }else{
-                        model.addTask(currentTask);
-                        view.showTaskListPage(model.getTaskList());
+                        try {
+                            model.addTask(currentTask);
+                        } catch (NullTaskException e) {
+                            exit = true;
+                        }
+                        try {
+                            view.showTaskListPage(model.getTaskList());
+                        } catch (NullTaskListException e) {
+                            exit = true;
+                        }
                     }
                     break;
                 case ADDTASK2: //Add unrepeated task
@@ -112,14 +139,26 @@ public class ControllerImpl {
                     if(!checkMapTask(mapTask1)){
                         view.showErrorAddTask();
                     }else{
-                        model.addTask(currentTask);
-                        view.showTaskListPage(model.getTaskList());
+                        try {
+                            model.addTask(currentTask);
+                        } catch (NullTaskException e) {
+                            exit = true;
+                        }
+                        try {
+                            view.showTaskListPage(model.getTaskList());
+                        } catch (NullTaskListException e) {
+                            exit = true;
+                        }
                     }
                     break;
                 case ADDTASK3: //Back to Task list page
                 case ERRORADDTASK2:
                 case ERROREDITTASK2:
-                    view.showTaskListPage(model.getTaskList());
+                    try {
+                        view.showTaskListPage(model.getTaskList());
+                    } catch (NullTaskListException e) {
+                        exit = true;
+                    }
                     break;
                 default:
                     view.showMessage( "You entered wrong action" );
