@@ -2,7 +2,10 @@ package com.netcracker.lab1.stetsenko.model;
 
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -10,13 +13,13 @@ import java.util.Date;
  */
 public interface Model {
 
-    TaskList getTaskListFromFile(String pathFile);
+    TaskList getTaskListFromFile(String pathFile) throws IOException;
 
-    boolean addTask(Task task);
+    boolean addTask(Task task) throws NullTaskException;
 
-    TaskList getTaskList();
+    TaskList getTaskList() throws NullTaskListException;
 
-    TaskList saveTaskListFromFile(String pathFile);
+    TaskList saveTaskListFromFile(String pathFile) throws IOException;
 
     Task getTask(int i);
 

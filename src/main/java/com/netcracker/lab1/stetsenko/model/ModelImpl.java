@@ -1,6 +1,8 @@
 package com.netcracker.lab1.stetsenko.model;
 
 import com.netcracker.lab1.stetsenko.*;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
+import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
 
 import java.io.File;
 import java.io.FileReader;
@@ -15,39 +17,54 @@ public class ModelImpl implements Model {
 
     private TaskList taskList;
 
-    public TaskList getTaskListFromFile(String pathFile) {
-        FileReader in = null;
-        try {
-            in = new FileReader(pathFile);
+    public TaskList getTaskListFromFile(String pathFile) throws IOException{
+
+        try (FileReader in = new FileReader(pathFile)){
+            this.taskList = new LinkedTaskList();
+            TaskIO.read(this.taskList, in);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
 
-        this.taskList = new LinkedTaskList();
-        TaskIO.read(this.taskList, in);
-
-        return getTaskList();
+        try {
+            return getTaskList();
+        } catch (NullTaskListException e) {
+            return new LinkedTaskList();
+        }
     }
 
-    public boolean addTask(Task task) {
-        return this.taskList.add(task);
+    public boolean addTask(Task task) throws NullTaskException {
+
+        try{
+            return this.taskList.add(task);
+        } catch (NullPointerException e) {
+            throw new NullTaskException("Task is null!");
+        }
+
     }
 
-    public TaskList getTaskList(){
+    public TaskList getTaskList() throws NullTaskListException {
+
+        if(this.taskList == null){
+            throw new NullTaskListException("Task list is empty!");
+        }
+
         return this.taskList;
     }
 
-    public TaskList saveTaskListFromFile(String pathFile) {
+    public TaskList saveTaskListFromFile(String pathFile) throws IOException{
 
-        FileWriter out = null;
-        try {
-            out = new FileWriter(pathFile);
+        try (FileWriter out = new FileWriter(pathFile)){
+            TaskIO.write(this.taskList, out);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw e;
         }
 
-        TaskIO.write(this.taskList, out);
-        return getTaskList();
+        try {
+            return getTaskList();
+        } catch (NullTaskListException e) {
+            return new LinkedTaskList();
+        }
     }
 
     public Task getTask(int i) {
