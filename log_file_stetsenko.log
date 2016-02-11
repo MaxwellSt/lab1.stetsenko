@@ -1,0 +1,2 @@
+2016-02-11 17:44:39 INFO  ControllerImpl:31 - Test log message
+2016-02-11 17:44:41 ERROR ControllerImpl:51 - test log error message
