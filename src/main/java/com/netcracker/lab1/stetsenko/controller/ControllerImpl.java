@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+
 
 /**
  * Created by ���� on 20.01.2016.
@@ -56,13 +56,11 @@ public class ControllerImpl {
                     break;
                 case TASKLIST1:
                     HashMap<String, String> mapDateString = view.getDateInterval();
-                    HashMap<String, Date> mapDate = null;
+                    HashMap<String, Date> mapDate = new HashMap<String, Date>();
                     if(checkIntervalDate(mapDateString, mapDate)){
                        view.showCalendar(model.incoming(mapDate.get("dateFrom"), mapDate.get("dateTo")));
-                    }else{
-
                     }
-
+                    view.showTaskListPage(model.getTaskList());
                     break;
                 case TASKLIST2:
                 case ERRORADDTASK1://add new task
@@ -73,7 +71,7 @@ public class ControllerImpl {
                     int i = view.showSelectTask();
                     Task editTask= model.getTask(i-1);
                     System.out.println(editTask.toString());
-                    HashMap<String, String> mapEditTask = null;
+                    HashMap<String, String> mapEditTask = new HashMap<String, String>();
                     if(editTask.isRepeated()){
                        mapEditTask = view.editRepeatedTask(editTask);
                     }else{
@@ -207,7 +205,7 @@ public class ControllerImpl {
         Date dateFrom = null;
         Date dateTo   = null;
 
-        if (mapDateString.containsKey("startTime")){
+        if (mapDateString.containsKey("dateFrom")){
             try {
                 dateFrom = format.parse(mapDateString.get("dateFrom"));
                 mapDate.put("dateFrom", dateFrom);
@@ -215,6 +213,8 @@ public class ControllerImpl {
                 System.out.println("wrong Date-from format <" + mapDateString.get("dateFrom") + ">");
                 result = false;
             }
+        }else{
+            result = false;
         }
         if (mapDateString.containsKey("dateTo")){
             try {
@@ -224,6 +224,8 @@ public class ControllerImpl {
                 System.out.println("wrong Date-to format <" + mapDateString.get("dateTo") + ">");
                 result = false;
             }
+        }else{
+            result = false;
         }
 
         return result;

@@ -166,8 +166,14 @@ public class ViewImpl implements View{
 
     public void showCalendar(Iterable<Task> calendar) {
 
-
-
+        System.out.println("********* Calendar *********");
+        Iterator it = calendar.iterator();
+        int i = 0;
+        while (it.hasNext()) {
+            i++;
+            Task task = (Task) it.next();
+            System.out.println("" + i + ". " + task.toString());
+        }
     }
 
     public HashMap<String, String> getDateInterval() {
@@ -180,6 +186,8 @@ public class ViewImpl implements View{
         System.out.println("- enter Date-to. <yyyy-MM-dd H:m> (example: 2016-12-30 17:25)");
         mapDate.put("dateTo", scanner.nextLine());
 
+        System.out.println(mapDate.get("dateFrom"));
+        System.out.println(mapDate.get("dateTo"));
         return mapDate;
     }
 }
