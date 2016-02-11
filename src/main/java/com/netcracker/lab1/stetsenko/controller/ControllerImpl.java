@@ -11,7 +11,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-
+import org.apache.log4j.Logger;
 
 /**
  * Created by ���� on 20.01.2016.
@@ -22,7 +22,10 @@ public class ControllerImpl {
     private View view;
     private Task currentTask = null;
 
+    private static final Logger log = Logger.getLogger(ControllerImpl.class);
+
     public static void main( String[] args ) {
+        log.info("Test log message");
         new ControllerImpl( new ModelImpl(), new ViewImpl() ).start();
     }
 
@@ -42,6 +45,7 @@ public class ControllerImpl {
 
             switch (action) {
                 case STARTPAGE1:
+                    log.error("test log error message");
                     String pathFile = view.showPathFile();
                     if (checkPathFile(pathFile)) {
                         view.showTaskListPage(model.getTaskListFromFile(pathFile));
