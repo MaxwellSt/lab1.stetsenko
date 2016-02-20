@@ -4,6 +4,7 @@ import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
 import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
+import com.netcracker.lab1.stetsenko.taskException.TaskNotFoundException;
 
 import java.io.IOException;
 import java.util.Date;
@@ -13,16 +14,19 @@ import java.util.Date;
  */
 public interface Model {
 
-    TaskList getTaskListFromFile(String pathFile) throws IOException;
-
     boolean addTask(Task task) throws NullTaskException;
 
     TaskList getTaskList() throws NullTaskListException;
 
-    TaskList saveTaskListFromFile(String pathFile) throws IOException;
+    void saveTaskList() throws IOException;
 
-    Task getTask(int i);
+    Task getTask(int i) throws TaskNotFoundException;
 
     Iterable<Task> incoming(Date from, Date to);
 
+    Task createUnrepeatedTask(String title, Date time, boolean active);
+
+    Task createRepeatedTask(String title, Date startTime, Date endTime, int interval, boolean active);
+
+    void removeTask(Task task);
 }

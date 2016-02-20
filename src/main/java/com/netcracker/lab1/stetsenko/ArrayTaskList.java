@@ -32,9 +32,9 @@ public class ArrayTaskList extends TaskList {
         }
     }
 
-    public boolean add(Task task) throws NullPointerException {
+    public boolean add(Task task) {
         if (task == null) {
-            throw new NullPointerException();
+            throw new IllegalArgumentException("Task is null");
         }
         if (getSize() < maxLenght) {
             arrayTask[size] = task;

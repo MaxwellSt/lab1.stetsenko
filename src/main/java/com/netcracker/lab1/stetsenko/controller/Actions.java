@@ -4,19 +4,18 @@ package com.netcracker.lab1.stetsenko.controller;
  * Created by ���� on 25.01.2016.
  */
 public enum Actions {
-    STARTPAGE1,
-    STARTPAGE2,
-    TASKLIST1,
-    TASKLIST2,
-    TASKLIST3,
-    TASKLIST4,
-    TASKLIST5,
-    ADDTASK1,
-    ADDTASK2,
-    ADDTASK3,
-    ERRORADDTASK1,
-    ERRORADDTASK2,
-    ERROREDITTASK1,
-    ERROREDITTASK2
+    TASK_LIST_1,
+    TASK_LIST_2,
+    TASK_LIST_3,
+    TASK_LIST_4,
+    TASK_LIST_5,
+    TASK_LIST_6,
+    ADD_TASK_1,
+    ADD_TASK_2,
+    ADD_TASK_3,
+    ERROR_ADD_TASK_1,
+    ERROR_ADD_TASK_2,
+    ERROR_EDIT_TASK_1,
+    ERROR_EDIT_TASK_2
 
 }

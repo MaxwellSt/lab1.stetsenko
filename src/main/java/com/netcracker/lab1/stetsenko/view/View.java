@@ -6,19 +6,16 @@ import com.netcracker.lab1.stetsenko.controller.Actions;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ���� on 20.01.2016.
  */
 public interface View {
 
-    void showStartPage();
-
     Actions getAction();
 
     void showMessage( String message );
-
-    String showPathFile();
 
     void showTaskListPage(TaskList taskList);
 
@@ -26,19 +23,17 @@ public interface View {
 
     void showErrorAddTask();
 
-    HashMap<String, String> editRepeatedTask(Task task);
+    Map<String, String> editRepeatedTask(Task task);
 
-    HashMap<String, String> editUnrepeatedTask(Task task);
+    Map<String, String> editUnrepeatedTask(Task task);
 
-    HashMap<String, String> addRepeatedTask();
+    Map<String, String> addRepeatedTask();
 
-    HashMap<String, String> addUnrepeatedTask();
+    Map<String, String> addUnrepeatedTask();
 
     int showSelectTask();
 
-    void showErrorEditTask();
-
     void showCalendar(Iterable<Task> calendar);
 
-    HashMap<String, String> getDateInterval();
+    Map<String, String> getDateInterval();
 }

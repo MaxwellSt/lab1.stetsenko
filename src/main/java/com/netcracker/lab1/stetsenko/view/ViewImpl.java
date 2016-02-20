@@ -19,19 +19,11 @@ public class ViewImpl implements View{
         scanner = new Scanner( System.in );
     }
 
-    public void showStartPage() {
-        System.out.println("********* Start page *********");
-        System.out.println( "Enter please one of the following actions:" );
-        System.out.println( "1. Read TaskList from file" );
-        System.out.println( "2. Exit" );
-        pageID = "STARTPAGE";
-    }
-
     public Actions getAction() {
         Actions result = null;
 
         try {
-            String s = pageID + scanner.nextInt();
+            String s = pageID + "_" + scanner.nextInt();
             result = Actions.valueOf(s);
         } catch (IllegalArgumentException e) {
             System.out.println("You entered wrong action. Try again.");
@@ -46,10 +38,6 @@ public class ViewImpl implements View{
 
     public void showMessage( String message ) {
         System.out.println( "Message : " + message );
-    }
-
-    public String showPathFile(){
-        return "test3.txt";
     }
 
     public void showTaskListPage(TaskList taskList) {
@@ -67,8 +55,9 @@ public class ViewImpl implements View{
         System.out.println("2. Add new task");
         System.out.println("3. Edit task");
         System.out.println("4. Save task list file");
-        System.out.println("5. Exit");
-        pageID = "TASKLIST";
+        System.out.println("5. Delete task");
+        System.out.println("6. Exit");
+        pageID = "TASK_LIST";
     }
 
     public void showAddTask() {
@@ -76,17 +65,17 @@ public class ViewImpl implements View{
         System.out.println("1. Add repeated task");
         System.out.println("2. Add unrepeated task");
         System.out.println("3. Back");
-        pageID = "ADDTASK";
+        pageID = "ADD_TASK";
     }
 
     public void showErrorAddTask() {
         System.out.println("********* Error Add task page *********");
         System.out.println("1. Repeat add task");
         System.out.println("2. Back");
-        pageID = "ERRORADDTASK";
+        pageID = "ERROR_ADD_TASK";
     }
 
-    public HashMap<String, String> editRepeatedTask(Task task){
+    public Map<String, String> editRepeatedTask(Task task){
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m");
 
@@ -106,7 +95,7 @@ public class ViewImpl implements View{
         return mapTask;
     }
 
-    public HashMap<String, String> editUnrepeatedTask(Task task){
+    public Map<String, String> editUnrepeatedTask(Task task){
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd H:m");
 
@@ -122,7 +111,7 @@ public class ViewImpl implements View{
         return mapTask;
     }
 
-    public HashMap<String, String> addRepeatedTask() {
+    public Map<String, String> addRepeatedTask() {
 
         HashMap<String, String> mapTask = new HashMap<String, String>();
         System.out.println("- enter title of task.");
@@ -140,7 +129,7 @@ public class ViewImpl implements View{
         return mapTask;
     }
 
-    public HashMap<String, String> addUnrepeatedTask() {
+    public Map<String, String> addUnrepeatedTask() {
 
         HashMap<String, String> mapTask = new HashMap<String, String>();
         System.out.println("- enter title of task.");
@@ -161,7 +150,7 @@ public class ViewImpl implements View{
         System.out.println("********* Error Add task page *********");
         System.out.println("1. Repeat edit task");
         System.out.println("2. Back");
-        pageID = "ERROREDITTASK";
+        pageID = "ERROR_EDIT_TASK";
     }
 
     public void showCalendar(Iterable<Task> calendar) {
@@ -176,7 +165,7 @@ public class ViewImpl implements View{
         }
     }
 
-    public HashMap<String, String> getDateInterval() {
+    public Map<String, String> getDateInterval() {
 
         HashMap<String, String> mapDate = new HashMap<String, String>();
 

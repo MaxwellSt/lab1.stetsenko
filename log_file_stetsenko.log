@@ -1,2 +1,11 @@
 2016-02-11 17:44:39 INFO  ControllerImpl:31 - Test log message
 2016-02-11 17:44:41 ERROR ControllerImpl:51 - test log error message
+2016-02-11 17:46:33 INFO  ControllerImpl:31 - Test log message
+2016-02-20 10:00:10 INFO  ControllerImpl:31 - Test log message
+2016-02-20 10:00:13 ERROR ControllerImpl:243 - test log error message
+2016-02-20 10:00:51 INFO  ControllerImpl:31 - Test log message
+2016-02-20 10:00:53 ERROR ControllerImpl:243 - test log error message
+2016-02-20 11:26:23 INFO  ControllerImpl:34 - Test log message
+2016-02-20 12:05:14 INFO  ControllerImpl:34 - Test log message
+2016-02-20 12:29:51 INFO  ControllerImpl:34 - Test log message
+2016-02-20 12:30:06 INFO  ControllerImpl:34 - Test log message

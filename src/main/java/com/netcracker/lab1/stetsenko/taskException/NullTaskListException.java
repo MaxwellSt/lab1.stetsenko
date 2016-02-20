@@ -5,6 +5,9 @@ package com.netcracker.lab1.stetsenko.taskException;
  */
 public class NullTaskListException extends Exception {
 
+    public NullTaskListException(Exception e){
+        super(e);
+    }
     public NullTaskListException(String message){
 
         super(message);

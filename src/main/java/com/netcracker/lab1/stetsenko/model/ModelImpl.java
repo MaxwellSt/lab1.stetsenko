@@ -3,6 +3,7 @@ package com.netcracker.lab1.stetsenko.model;
 import com.netcracker.lab1.stetsenko.*;
 import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
 import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
+import com.netcracker.lab1.stetsenko.taskException.TaskNotFoundException;
 
 import java.io.File;
 import java.io.FileReader;
@@ -16,8 +17,9 @@ import java.util.Date;
 public class ModelImpl implements Model {
 
     private TaskList taskList;
+    private String pathFile = "test3.txt";
 
-    public TaskList getTaskListFromFile(String pathFile) throws IOException{
+    public void readTaskListFromFile() throws IOException{
 
         try (FileReader in = new FileReader(pathFile)){
             this.taskList = new LinkedTaskList();
@@ -26,18 +28,13 @@ public class ModelImpl implements Model {
             throw e;
         }
 
-        try {
-            return getTaskList();
-        } catch (NullTaskListException e) {
-            return new LinkedTaskList();
-        }
     }
 
     public boolean addTask(Task task) throws NullTaskException {
 
         try{
             return this.taskList.add(task);
-        } catch (NullPointerException e) {
+        } catch (IllegalArgumentException e) {
             throw new NullTaskException("Task is null!");
         }
 
@@ -46,32 +43,50 @@ public class ModelImpl implements Model {
     public TaskList getTaskList() throws NullTaskListException {
 
         if(this.taskList == null){
-            throw new NullTaskListException("Task list is empty!");
+            try {
+                readTaskListFromFile();
+            } catch (IOException e) {
+                throw new NullTaskListException(e);
+            }
         }
 
         return this.taskList;
     }
 
-    public TaskList saveTaskListFromFile(String pathFile) throws IOException{
+    public void saveTaskList() throws IOException{
 
         try (FileWriter out = new FileWriter(pathFile)){
             TaskIO.write(this.taskList, out);
         } catch (IOException e) {
             throw e;
         }
-
-        try {
-            return getTaskList();
-        } catch (NullTaskListException e) {
-            return new LinkedTaskList();
-        }
     }
 
-    public Task getTask(int i) {
-        return this.taskList.getTask(i);
+    public Task getTask(int i) throws TaskNotFoundException {
+        try {
+            return this.taskList.getTask(i);
+        }catch (IndexOutOfBoundsException e){
+            throw new TaskNotFoundException(e);
+        }
     }
 
     public Iterable<Task> incoming(Date from, Date to){
         return Tasks.incoming(taskList, from, to);
+    }
+
+    public Task createUnrepeatedTask(String title, Date time, boolean active) {
+        Task task = new Task(title, time);
+        task.setActive(active);
+        return task;
+    }
+
+    public Task createRepeatedTask(String title, Date startTime, Date endTime, int interval, boolean active) {
+        Task task = new Task(title, startTime, endTime, interval);
+        task.setActive(active);
+        return task;
+    }
+
+    public void removeTask(Task task) {
+        taskList.remove(task);
     }
 }
