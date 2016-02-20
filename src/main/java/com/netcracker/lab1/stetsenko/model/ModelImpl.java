@@ -63,11 +63,9 @@ public class ModelImpl implements Model {
     }
 
     public Task getTask(int i) throws TaskNotFoundException {
-        try {
-            return this.taskList.getTask(i);
-        }catch (IndexOutOfBoundsException e){
-            throw new TaskNotFoundException(e);
-        }
+        if (i >= this.taskList.getSize())
+            throw new TaskNotFoundException("Task not found!");
+        return this.taskList.getTask(i);
     }
 
     public Iterable<Task> incoming(Date from, Date to){

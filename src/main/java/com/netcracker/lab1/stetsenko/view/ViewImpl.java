@@ -19,19 +19,18 @@ public class ViewImpl implements View{
         scanner = new Scanner( System.in );
     }
 
-    public Actions getAction() {
-        Actions result = null;
+    public Actions.EnumActions getAction() {
 
-        try {
-            String s = pageID + "_" + scanner.nextInt();
-            result = Actions.valueOf(s);
-        } catch (IllegalArgumentException e) {
+        Actions.EnumActions result = null;
+
+        String s = pageID + "_" + scanner.nextInt();
+        result = Actions.MAP_ENUM.get(s);
+
+        if (result == null) {
+
             System.out.println("You entered wrong action. Try again.");
             result = getAction();
-        }catch (InputMismatchException e){
-            System.out.println("You entered wrong action. Try again.");
-            scanner.nextLine();
-            result = getAction();
+
         }
         return result;
     }
@@ -43,13 +42,12 @@ public class ViewImpl implements View{
     public void showTaskListPage(TaskList taskList) {
 
         System.out.println("********* Task list *********");
-        Iterator it = taskList.iterator();
         int i = 0;
-        while (it.hasNext()) {
+        for (Task t : taskList) {
             i++;
-            Task task = (Task) it.next();
-            System.out.println("" + i + ". " + task.toString());
+            System.out.println("" + i + ". " + t.toString());
         }
+
         System.out.println("********* List page *********");
         System.out.println("1. Show Calendar");
         System.out.println("2. Add new task");
@@ -156,12 +154,10 @@ public class ViewImpl implements View{
     public void showCalendar(Iterable<Task> calendar) {
 
         System.out.println("********* Calendar *********");
-        Iterator it = calendar.iterator();
         int i = 0;
-        while (it.hasNext()) {
+        for (Task t : calendar) {
             i++;
-            Task task = (Task) it.next();
-            System.out.println("" + i + ". " + task.toString());
+            System.out.println("" + i + ". " + t.toString());
         }
     }
 

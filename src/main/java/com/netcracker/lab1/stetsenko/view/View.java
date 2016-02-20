@@ -13,7 +13,7 @@ import java.util.Map;
  */
 public interface View {
 
-    Actions getAction();
+    Actions.EnumActions getAction();
 
     void showMessage( String message );
 
@@ -22,6 +22,8 @@ public interface View {
     void showAddTask();
 
     void showErrorAddTask();
+
+    void showErrorEditTask();
 
     Map<String, String> editRepeatedTask(Task task);
 

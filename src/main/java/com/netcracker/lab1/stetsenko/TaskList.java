@@ -2,7 +2,7 @@ package com.netcracker.lab1.stetsenko;
 /**
  * Created by Max on 14.11.2015.
  */
-public abstract class TaskList implements Iterable, java.io.Serializable{
+public abstract class TaskList implements Iterable<Task>, java.io.Serializable{
 
     public abstract boolean add(Task task);
     public abstract int getSize();

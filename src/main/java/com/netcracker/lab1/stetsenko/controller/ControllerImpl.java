@@ -41,7 +41,7 @@ public class ControllerImpl {
     }
 
     public void start() {
-        Actions action;
+        Actions.EnumActions action;
         boolean exit = false;
         showStartPage(exit);
 
@@ -64,7 +64,7 @@ public class ControllerImpl {
                     saveToFile(exit);
                     break;
                 case TASK_LIST_5:
-                    contrDaleteTask(exit);
+                    removeTask(exit);
                     break;
                 case TASK_LIST_6:
                     exit = true;
@@ -233,13 +233,13 @@ public class ControllerImpl {
             mapEditTask = view.editUnrepeatedTask(editTask);
         }
         if(!checkMapTask(mapEditTask)){
-            view.showErrorAddTask();
+            view.showErrorEditTask();
         }else{
             try {
-                model.getTaskList().remove(editTask);
-                model.getTaskList().add(currentTask);
-                view.showTaskListPage(model.getTaskList());
-            } catch (NullTaskListException e) {
+                model.removeTask(editTask);
+                model.addTask(currentTask);
+                showStartPage(exit);
+            } catch (NullTaskException e) {
                 exit = true;
             }
         }
@@ -287,7 +287,7 @@ public class ControllerImpl {
         showStartPage(exit);
     }
 
-    private void contrDaleteTask(boolean exit){
+    private void removeTask(boolean exit){
         int i = view.showSelectTask();
         Task delTask= null;
         try {
