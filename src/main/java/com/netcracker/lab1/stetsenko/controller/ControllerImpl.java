@@ -9,7 +9,6 @@ import com.netcracker.lab1.stetsenko.taskException.TaskNotFoundException;
 import com.netcracker.lab1.stetsenko.view.View;
 import com.netcracker.lab1.stetsenko.view.ViewImpl;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
