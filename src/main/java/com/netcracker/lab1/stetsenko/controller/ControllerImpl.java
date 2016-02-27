@@ -23,7 +23,6 @@ public class ControllerImpl {
 
     private Model model;
     private View view;
-    private Task currentTask = null;
 
     private static final Logger log = Logger.getLogger(ControllerImpl.class);
 
