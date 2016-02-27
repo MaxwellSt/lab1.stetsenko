@@ -173,13 +173,12 @@ public class ControllerImpl {
 
     private void saveToFile(boolean exit) {
         try {
-            model.saveTaskList();
-        } catch (IOException e) {
+            model.saveTasks();
+        } catch (IOTasksException e) {
             exit = true;
         }
         log.info("saveToFile (" + exit + ")");
         showStartPage(exit);
-
     }
 
     private void addRepeatedTask(boolean exit) {
