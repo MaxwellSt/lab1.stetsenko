@@ -15,7 +15,7 @@ public interface View {
 
     Actions.EnumActions getAction();
 
-    void showMessage(String message );
+    void showMessage( String message );
 
     void showTaskListPage(Iterable<Task> taskList);
 

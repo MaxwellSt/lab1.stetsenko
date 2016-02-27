@@ -2,31 +2,26 @@ package com.netcracker.lab1.stetsenko.model;
 
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
-import com.netcracker.lab1.stetsenko.taskException.NullTaskException;
-import com.netcracker.lab1.stetsenko.taskException.NullTaskListException;
-import com.netcracker.lab1.stetsenko.taskException.TaskNotFoundException;
+import com.netcracker.lab1.stetsenko.taskException.*;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 
-/**
- * Created by ���� on 20.01.2016.
- */
 public interface Model {
 
-    boolean addTask(Task task) throws NullTaskException;
+    TaskList getTaskList();
 
-    TaskList getTaskList() throws NullTaskListException;
-
-    void saveTaskList() throws IOException;
+    public void saveTaskList() throws IOException;
 
     Task getTask(int i) throws TaskNotFoundException;
 
     Iterable<Task> incoming(Date from, Date to);
 
-    Task createUnrepeatedTask(String title, Date time, boolean active);
+    Task createTask(Map<String, String> mapTask) throws CreateTaskException;
 
-    Task createRepeatedTask(String title, Date startTime, Date endTime, int interval, boolean active);
+    Task editTask(Map<String, String> mapTask, Task currentTask) throws EditTaskException;
 
-    void removeTask(Task task);
+    boolean removeTask(int i);
+
 }

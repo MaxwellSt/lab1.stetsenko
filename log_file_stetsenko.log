@@ -18,3 +18,7 @@
 2016-02-20 15:15:49 INFO  ControllerImpl:34 - Test log message
 2016-02-20 15:16:31 INFO  ControllerImpl:34 - Test log message
 2016-02-20 15:16:40 INFO  ControllerImpl:34 - Test log message
+2016-02-27 16:15:49 INFO  ControllerImpl:31 - Test log message
+2016-02-27 16:15:52 ERROR ControllerImpl:51 - test log error message
+2016-02-27 16:17:35 INFO  ControllerImpl:31 - Test log message
+2016-02-27 16:17:38 ERROR ControllerImpl:51 - test log error message
