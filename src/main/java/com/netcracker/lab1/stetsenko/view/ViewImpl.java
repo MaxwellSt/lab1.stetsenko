@@ -21,10 +21,8 @@ public class ViewImpl implements View{
 
     public Actions.EnumActions getAction() {
 
-        Actions.EnumActions result = null;
-
         String s = pageID + "_" + scanner.nextInt();
-        result = Actions.MAP_ENUM.get(s);
+        Actions.EnumActions result = Actions.MAP_ENUM.get(s);
 
         if (result == null) {
 
@@ -39,7 +37,7 @@ public class ViewImpl implements View{
         System.out.println( "Message : " + message );
     }
 
-    public void showTaskListPage(TaskList taskList) {
+    public void showTaskListPage(Iterable<Task> taskList) {
 
         System.out.println("********* Task list *********");
         int i = 0;
