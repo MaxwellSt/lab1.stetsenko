@@ -49,10 +49,12 @@ public class ModelImpl implements Model {
         return this.taskList;
     }
 
-    public void saveTaskList() throws IOException {
+    public void saveTasks() throws IOTasksException {
         log.info("saveTaskList");
         try (FileWriter out = new FileWriter(PATH_FILE)) {
             TaskIO.write(this.taskList, out);
+        }catch (IOException e){
+            throw new IOTasksException(e);
         }
     }
 

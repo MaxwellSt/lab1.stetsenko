@@ -13,7 +13,7 @@ public interface Model {
 
     ArrayTaskList getTaskList();
 
-    public void saveTaskList() throws IOException;
+    public void saveTasks() throws IOTasksException;
 
     Task getTask(int i) throws TaskNotFoundException;
 
