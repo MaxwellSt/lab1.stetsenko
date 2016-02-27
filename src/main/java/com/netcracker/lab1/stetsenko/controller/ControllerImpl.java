@@ -27,7 +27,7 @@ public class ControllerImpl {
     private static final Logger log = Logger.getLogger(ControllerImpl.class);
 
     public static void main(String[] args) {
-        log.info("Test log message");
+        log.info("Start program");
         new ControllerImpl(new ModelImpl(), new ViewImpl()).start();
     }
 
@@ -107,6 +107,7 @@ public class ControllerImpl {
                 dateFrom = format.parse(mapDateString.get("dateFrom"));
                 mapDate.put("dateFrom", dateFrom);
             } catch (ParseException e) {
+                log.warn("dateFrom not valid");
                 System.out.println("wrong Date-from format <" + mapDateString.get("dateFrom") + ">");
                 result = false;
             }
@@ -118,6 +119,7 @@ public class ControllerImpl {
                 dateTo = format.parse(mapDateString.get("dateTo"));
                 mapDate.put("dateTo", dateTo);
             } catch (ParseException e) {
+                log.warn("dateTo not valid");
                 System.out.println("wrong Date-to format <" + mapDateString.get("dateTo") + ">");
                 result = false;
             }
@@ -135,6 +137,7 @@ public class ControllerImpl {
     }
 
     private void showCalendar(boolean exit) {
+        log.info("showCalendar");
         Map<String, String> mapDateString = view.getDateInterval();
         Map<String, Date> mapDate = new HashMap<String, Date>();
         if (checkIntervalDate(mapDateString, mapDate)) {
@@ -145,6 +148,7 @@ public class ControllerImpl {
 
     private void editTask(boolean exit) {
         int i = view.showSelectTask();
+        log.info("editTask (#" + i + ")");
         Task editTask = null;
         try {
             editTask = model.getTask(i - 1);
@@ -162,6 +166,7 @@ public class ControllerImpl {
         try {
             model.editTask(mapEditTask, editTask);
         } catch (EditTaskException e) {
+            log.warn("EditTaskException");
             view.showErrorEditTask();
         }
     }
@@ -172,6 +177,7 @@ public class ControllerImpl {
         } catch (IOException e) {
             exit = true;
         }
+        log.info("saveToFile (" + exit + ")");
         showStartPage(exit);
 
     }
@@ -183,6 +189,7 @@ public class ControllerImpl {
         } catch (CreateTaskException e) {
             view.showErrorAddTask();
         }
+        log.info("addRepeatedTask (" + exit + ")");
         showStartPage(exit);
     }
 
@@ -193,6 +200,7 @@ public class ControllerImpl {
         } catch (CreateTaskException e) {
             view.showErrorAddTask();
         }
+        log.info("addUnrepeatedTask (" + exit + ")");
         showStartPage(exit);
     }
 
@@ -202,7 +210,8 @@ public class ControllerImpl {
 
     private void removeTask(boolean exit) {
         int i = view.showSelectTask();
-        model.removeTask(i-1);
+        exit = !model.removeTask(i-1);
+        log.info("removeTask (" + exit + ")");
         showStartPage(exit);
     }
 

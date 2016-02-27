@@ -2,13 +2,15 @@ package com.netcracker.lab1.stetsenko.model;
 
 import com.netcracker.lab1.stetsenko.*;
 import com.netcracker.lab1.stetsenko.taskException.*;
+import org.apache.log4j.Logger;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -17,12 +19,15 @@ import java.util.Map;
  */
 public class ModelImpl implements Model {
 
-    private TaskList taskList;
+    private ArrayTaskList taskList;
     private final String PATH_FILE = "test3.txt";
 
-    private TaskList readTaskListFromFile() {
+    private static final Logger log = Logger.getLogger(ModelImpl.class);
 
-        TaskList resTaskList = new LinkedTaskList();
+    private ArrayTaskList readTaskListFromFile() {
+
+        log.info("readTaskListFromFile");
+        ArrayTaskList resTaskList = new ArrayTaskList();
 
         try (FileReader in = new FileReader(PATH_FILE)) {
 
@@ -35,7 +40,7 @@ public class ModelImpl implements Model {
 
     }
 
-    public TaskList getTaskList() {
+    public ArrayTaskList getTaskList() {
 
         if (this.taskList == null) {
             this.taskList = readTaskListFromFile();
@@ -45,13 +50,14 @@ public class ModelImpl implements Model {
     }
 
     public void saveTaskList() throws IOException {
-
+        log.info("saveTaskList");
         try (FileWriter out = new FileWriter(PATH_FILE)) {
             TaskIO.write(this.taskList, out);
         }
     }
 
     public Task getTask(int i) throws TaskNotFoundException {
+        log.info("getTask");
         if (i < 0 || i >= this.taskList.getSize())
             throw new TaskNotFoundException("Task not found!");
         return this.taskList.getTask(i);
@@ -62,16 +68,18 @@ public class ModelImpl implements Model {
     }
 
     public Task createTask(Map<String, String> mapTask) throws CreateTaskException {
-
+        log.info("createTask");
         try {
-            return checkMapTask(mapTask, null);
+            Task newTask = checkMapTask(mapTask, null);
+            this.taskList.add(newTask);
+            return newTask;
         } catch (EditTaskException e) {
             throw new CreateTaskException(e);
         }
     }
 
     public Task editTask(Map<String, String> mapTask, Task currentTask) throws EditTaskException {
-
+        log.info("editTask");
         try {
             return checkMapTask(mapTask, currentTask);
         } catch (CreateTaskException e) {
@@ -80,6 +88,7 @@ public class ModelImpl implements Model {
     }
 
     public boolean removeTask(int i) {
+        log.info("removeTask");
         try {
             return taskList.remove(getTask(i));
         } catch (TaskNotFoundException e) {
@@ -166,7 +175,6 @@ public class ModelImpl implements Model {
                 throw new EditTaskException("");
             }
         }
-
         return tempTask;
     }
 }

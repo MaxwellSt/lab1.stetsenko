@@ -1,25 +1,18 @@
-2016-02-11 17:44:39 INFO  ControllerImpl:31 - Test log message
-2016-02-11 17:44:41 ERROR ControllerImpl:51 - test log error message
-2016-02-11 17:46:33 INFO  ControllerImpl:31 - Test log message
-2016-02-20 10:00:10 INFO  ControllerImpl:31 - Test log message
-2016-02-20 10:00:13 ERROR ControllerImpl:243 - test log error message
-2016-02-20 10:00:51 INFO  ControllerImpl:31 - Test log message
-2016-02-20 10:00:53 ERROR ControllerImpl:243 - test log error message
-2016-02-20 11:26:23 INFO  ControllerImpl:34 - Test log message
-2016-02-20 12:05:14 INFO  ControllerImpl:34 - Test log message
-2016-02-20 12:29:51 INFO  ControllerImpl:34 - Test log message
-2016-02-20 12:30:06 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:09:49 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:10:52 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:12:55 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:14:32 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:15:02 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:15:06 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:15:49 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:16:31 INFO  ControllerImpl:34 - Test log message
-2016-02-20 15:16:40 INFO  ControllerImpl:34 - Test log message
-2016-02-27 16:15:49 INFO  ControllerImpl:31 - Test log message
-2016-02-27 16:15:52 ERROR ControllerImpl:51 - test log error message
-2016-02-27 16:17:35 INFO  ControllerImpl:31 - Test log message
-2016-02-27 16:17:38 ERROR ControllerImpl:51 - test log error message
-2016-02-27 19:35:48 INFO  ControllerImpl:30 - Test log message
+2016-02-27 20:14:16 INFO  ControllerImpl:30 - Start program
+2016-02-27 20:14:16 INFO  ModelImpl:27 - readTaskListFromFile
+2016-02-27 20:14:54 INFO  ModelImpl:69 - createTask
+2016-02-27 20:14:54 INFO  ControllerImpl:203 - addUnrepeatedTask (false)
+2016-02-27 20:18:18 INFO  ControllerImpl:30 - Start program
+2016-02-27 20:18:18 INFO  ModelImpl:27 - readTaskListFromFile
+2016-02-27 20:19:00 INFO  ModelImpl:69 - createTask
+2016-02-27 20:19:00 INFO  ControllerImpl:203 - addUnrepeatedTask (false)
+2016-02-27 20:19:06 INFO  ModelImpl:51 - saveTaskList
+2016-02-27 20:19:06 INFO  ControllerImpl:180 - saveToFile (false)
+2016-02-27 20:19:14 INFO  ControllerImpl:30 - Start program
+2016-02-27 20:19:14 INFO  ModelImpl:27 - readTaskListFromFile
+2016-02-27 20:24:15 INFO  ControllerImpl:30 - Start program
+2016-02-27 20:24:15 INFO  ModelImpl:29 - readTaskListFromFile
+2016-02-27 20:25:14 INFO  ModelImpl:71 - createTask
+2016-02-27 20:25:14 INFO  ControllerImpl:192 - addRepeatedTask (false)
+2016-02-27 20:25:27 INFO  ModelImpl:53 - saveTaskList
+2016-02-27 20:25:27 INFO  ControllerImpl:180 - saveToFile (false)

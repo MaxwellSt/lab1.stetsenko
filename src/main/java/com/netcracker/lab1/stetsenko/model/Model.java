@@ -1,5 +1,6 @@
 package com.netcracker.lab1.stetsenko.model;
 
+import com.netcracker.lab1.stetsenko.ArrayTaskList;
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.taskException.*;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 public interface Model {
 
-    TaskList getTaskList();
+    ArrayTaskList getTaskList();
 
     public void saveTaskList() throws IOException;
 
