@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface Model {
 
-    ArrayTaskList getTaskList();
+    TaskList getTaskList();
 
     public void saveTasks() throws IOTasksException;
 

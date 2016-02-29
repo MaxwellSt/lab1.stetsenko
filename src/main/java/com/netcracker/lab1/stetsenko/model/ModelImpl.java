@@ -9,8 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 
@@ -19,15 +17,15 @@ import java.util.Map;
  */
 public class ModelImpl implements Model {
 
-    private ArrayTaskList taskList;
-    private final String PATH_FILE = "test3.txt";
+    private TaskList taskList;
+    private static final String PATH_FILE = "test3.txt";
 
     private static final Logger log = Logger.getLogger(ModelImpl.class);
 
-    private ArrayTaskList readTaskListFromFile() {
+    private TaskList readTaskListFromFile() {
 
         log.info("readTaskListFromFile");
-        ArrayTaskList resTaskList = new ArrayTaskList();
+        TaskList resTaskList = new ArrayTaskList();
 
         try (FileReader in = new FileReader(PATH_FILE)) {
 
@@ -40,7 +38,7 @@ public class ModelImpl implements Model {
 
     }
 
-    public ArrayTaskList getTaskList() {
+    public TaskList getTaskList() {
 
         if (this.taskList == null) {
             this.taskList = readTaskListFromFile();
