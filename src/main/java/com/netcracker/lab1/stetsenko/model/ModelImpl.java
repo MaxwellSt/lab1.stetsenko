@@ -4,6 +4,7 @@ import com.netcracker.lab1.stetsenko.*;
 import com.netcracker.lab1.stetsenko.taskException.*;
 import org.apache.log4j.Logger;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -31,12 +32,16 @@ public class ModelImpl implements Model {
 
             TaskIO.read(resTaskList, in);
 
-        } finally {
-
-            return resTaskList;
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
+        return resTaskList;
     }
+
+
 
     public TaskList getTaskList() {
 
