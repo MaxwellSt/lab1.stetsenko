@@ -22,3 +22,5 @@
 2016-03-02 11:54:16 INFO  ModelImpl:28 - readTaskListFromFile
 2016-03-02 11:54:29 INFO  ControllerImpl:29 - Start program
 2016-03-02 11:54:29 INFO  ModelImpl:28 - readTaskListFromFile
+2016-03-02 12:29:09 INFO  ControllerImpl:29 - Start program
+2016-03-02 12:29:09 INFO  ModelImpl:28 - readTaskListFromFile

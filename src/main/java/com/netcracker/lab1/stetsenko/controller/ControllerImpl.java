@@ -36,18 +36,21 @@ public class ControllerImpl {
     }
 
     public void start() {
-        Actions.EnumActions action;
-        boolean exit = false;
-        showStartPage(exit);
+        try {
+            Actions.EnumActions action;
+            boolean exit = false;
 
-        while (!exit) {
+            model.loadTaskList();
+            showStartPage(exit);
 
-            action = view.getAction();
+            while (!exit) {
 
-            switch (action) {
+                action = view.getAction();
 
-                case TASK_LIST_1:
-                    showCalendar(exit);
+                switch (action) {
+
+                    case TASK_LIST_1:
+                        showCalendar(exit);
                     break;
                 case TASK_LIST_2:
                     view.showAddTask();
@@ -88,7 +91,10 @@ public class ControllerImpl {
                 default:
                     view.showMessage("You entered wrong action");
                     break;
+                }
             }
+        } catch (LoadTaskException e) {
+            e.printStackTrace();
         }
     }
 

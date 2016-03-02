@@ -23,7 +23,7 @@ public class ModelImpl implements Model {
 
     private static final Logger log = Logger.getLogger(ModelImpl.class);
 
-    private TaskList readTaskListFromFile() throws IOException{
+    private TaskList readTaskListFromFile() throws IOException {
 
         log.info("readTaskListFromFile");
         TaskList resTaskList = new ArrayTaskList();
@@ -46,15 +46,12 @@ public class ModelImpl implements Model {
         }
     }
 
-    public TaskList getTaskList() throws GetTaskListException{
+    public TaskList getTaskList() throws GetTaskListException {
 
-        if (this.taskList == null) {
-
-                try {
-                    loadTaskList();
-                } catch (LoadTaskException e) {
-                   throw new GetTaskListException("Error get task list!");
-                }
+        try {
+            loadTaskList();
+        } catch (LoadTaskException e) {
+            throw new GetTaskListException("Error get task list!");
         }
 
         return this.taskList;
@@ -64,7 +61,7 @@ public class ModelImpl implements Model {
         log.info("saveTaskList");
         try (FileWriter out = new FileWriter(PATH_FILE)) {
             TaskIO.write(this.taskList, out);
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new SaveTasksException(e);
         }
     }
@@ -100,7 +97,7 @@ public class ModelImpl implements Model {
         }
     }
 
-    public boolean removeTask(int i) throws RemoveTaskException{
+    public boolean removeTask(int i) throws RemoveTaskException {
         log.info("removeTask");
         try {
             return taskList.remove(getTask(i));
@@ -183,7 +180,7 @@ public class ModelImpl implements Model {
             }
         } else {
 
-                throw new ValidateTaskException("Error validate params");
+            throw new ValidateTaskException("Error validate params");
         }
         return tempTask;
     }
