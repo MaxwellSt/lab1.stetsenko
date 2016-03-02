@@ -23,7 +23,7 @@ public class ModelImpl implements Model {
 
     private static final Logger log = Logger.getLogger(ModelImpl.class);
 
-    private TaskList readTaskListFromFile() {
+    private TaskList readTaskListFromFile() throws IOException{
 
         log.info("readTaskListFromFile");
         TaskList resTaskList = new ArrayTaskList();
@@ -32,32 +32,40 @@ public class ModelImpl implements Model {
 
             TaskIO.read(resTaskList, in);
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
         return resTaskList;
     }
 
+    public void loadTaskList() throws LoadTaskException {
 
+        try {
+            this.taskList = readTaskListFromFile();
+        } catch (IOException e) {
+            throw new LoadTaskException("Error load task list");
+        }
+    }
 
-    public TaskList getTaskList() {
+    public TaskList getTaskList() throws GetTaskListException{
 
         if (this.taskList == null) {
-            this.taskList = readTaskListFromFile();
+
+                try {
+                    loadTaskList();
+                } catch (LoadTaskException e) {
+                   throw new GetTaskListException("Error get task list!");
+                }
         }
 
         return this.taskList;
     }
 
-    public void saveTasks() throws IOTasksException {
+    public void saveTasks() throws SaveTasksException {
         log.info("saveTaskList");
         try (FileWriter out = new FileWriter(PATH_FILE)) {
             TaskIO.write(this.taskList, out);
-        }catch (IOException e){
-            throw new IOTasksException(e);
+        }catch (Exception e){
+            throw new SaveTasksException(e);
         }
     }
 
@@ -78,7 +86,7 @@ public class ModelImpl implements Model {
             Task newTask = checkMapTask(mapTask, null);
             this.taskList.add(newTask);
             return newTask;
-        } catch (EditTaskException e) {
+        } catch (ValidateTaskException e) {
             throw new CreateTaskException(e);
         }
     }
@@ -87,21 +95,21 @@ public class ModelImpl implements Model {
         log.info("editTask");
         try {
             return checkMapTask(mapTask, currentTask);
-        } catch (CreateTaskException e) {
+        } catch (ValidateTaskException e) {
             throw new EditTaskException(e);
         }
     }
 
-    public boolean removeTask(int i) {
+    public boolean removeTask(int i) throws RemoveTaskException{
         log.info("removeTask");
         try {
             return taskList.remove(getTask(i));
-        } catch (TaskNotFoundException e) {
-            return false;
+        } catch (Exception e) {
+            throw new RemoveTaskException("Remove error");
         }
     }
 
-    public Task checkMapTask(Map<String, String> mapTask, Task tempTask) throws CreateTaskException, EditTaskException {
+    private Task checkMapTask(Map<String, String> mapTask, Task tempTask) throws ValidateTaskException {
 
         Boolean result = true;
 
@@ -174,11 +182,8 @@ public class ModelImpl implements Model {
                 tempTask.setActive(active);
             }
         } else {
-            if (tempTask == null) {
-                throw new CreateTaskException("");
-            } else {
-                throw new EditTaskException("");
-            }
+
+                throw new ValidateTaskException("Error validate params");
         }
         return tempTask;
     }

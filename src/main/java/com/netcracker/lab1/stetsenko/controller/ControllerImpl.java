@@ -7,7 +7,6 @@ import com.netcracker.lab1.stetsenko.taskException.*;
 import com.netcracker.lab1.stetsenko.view.View;
 import com.netcracker.lab1.stetsenko.view.ViewImpl;
 
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -132,7 +131,11 @@ public class ControllerImpl {
 
     private void showStartPage(boolean exit) {
 
-        view.showTaskListPage(model.getTaskList());
+        try {
+            view.showTaskListPage(model.getTaskList());
+        } catch (GetTaskListException e) {
+            exit = true;
+        }
 
     }
 
@@ -174,7 +177,7 @@ public class ControllerImpl {
     private void saveToFile(boolean exit) {
         try {
             model.saveTasks();
-        } catch (IOTasksException e) {
+        } catch (SaveTasksException e) {
             exit = true;
         }
         log.info("saveToFile (" + exit + ")");
@@ -209,7 +212,11 @@ public class ControllerImpl {
 
     private void removeTask(boolean exit) {
         int i = view.showSelectTask();
-        exit = !model.removeTask(i-1);
+        try {
+            exit = !model.removeTask(i-1);
+        } catch (RemoveTaskException e) {
+            exit = true;
+        }
         log.info("removeTask (" + exit + ")");
         showStartPage(exit);
     }

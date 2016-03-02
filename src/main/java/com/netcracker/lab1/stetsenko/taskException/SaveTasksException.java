@@ -5,13 +5,13 @@ import java.io.IOException;
 /**
  * Created by Макс on 27.02.2016.
  */
-public class IOTasksException extends IOException {
+public class SaveTasksException extends Exception {
 
-    public IOTasksException(Exception e) {
+    public SaveTasksException(Exception e) {
         super(e);
     }
 
-    public IOTasksException(String message) {
+    public SaveTasksException(String message) {
         super(message);
     }
 }

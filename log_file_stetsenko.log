@@ -18,3 +18,7 @@
 2016-02-27 20:25:27 INFO  ControllerImpl:180 - saveToFile (false)
 2016-02-27 20:41:29 INFO  ControllerImpl:30 - Start program
 2016-02-27 20:41:29 INFO  ModelImpl:29 - readTaskListFromFile
+2016-03-02 11:54:16 INFO  ControllerImpl:29 - Start program
+2016-03-02 11:54:16 INFO  ModelImpl:28 - readTaskListFromFile
+2016-03-02 11:54:29 INFO  ControllerImpl:29 - Start program
+2016-03-02 11:54:29 INFO  ModelImpl:28 - readTaskListFromFile

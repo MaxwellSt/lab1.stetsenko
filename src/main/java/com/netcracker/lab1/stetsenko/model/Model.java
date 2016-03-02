@@ -1,19 +1,19 @@
 package com.netcracker.lab1.stetsenko.model;
 
-import com.netcracker.lab1.stetsenko.ArrayTaskList;
 import com.netcracker.lab1.stetsenko.Task;
 import com.netcracker.lab1.stetsenko.TaskList;
 import com.netcracker.lab1.stetsenko.taskException.*;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
 public interface Model {
 
-    TaskList getTaskList();
+    void loadTaskList() throws LoadTaskException;
 
-    public void saveTasks() throws IOTasksException;
+    TaskList getTaskList() throws GetTaskListException;
+
+    void saveTasks() throws SaveTasksException;
 
     Task getTask(int i) throws TaskNotFoundException;
 
@@ -23,6 +23,6 @@ public interface Model {
 
     Task editTask(Map<String, String> mapTask, Task currentTask) throws EditTaskException;
 
-    boolean removeTask(int i);
+    boolean removeTask(int i) throws RemoveTaskException;
 
 }
